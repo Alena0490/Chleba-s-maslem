@@ -1,6 +1,6 @@
+import { useState } from "react";
 import {pecivo, stavy, dialogy, type Pecivo} from "../pecivo" 
-import { ImLinkedin, ImFacebook2, ImGithub  } from "react-icons/im";
-
+import { ImLinkedin, ImFacebook2, ImGithub, ImPlay3, ImStop2, ImEarth } from "react-icons/im";
 interface GroupItem {
   pecivo: Pecivo
   stav: string
@@ -9,6 +9,9 @@ interface GroupItem {
 const JdeChleba = () => {
   let finalText = ""
   const group: GroupItem[] = []
+
+  const [isPlaying, setIsPlaying] = useState(false)
+
 
 const createList = (
   group: GroupItem[], 
@@ -48,7 +51,6 @@ const answer = (nazev: string): string => {
             
             const text = `${dialogy.jde} ${createList(group.slice(0, -1), 'nazev')} ${dialogy.potka} ${akuzativ} a ${nazev} ${dialogy.povida} ${createList(group.slice(0, -1), 'vokativ')}, ${dialogy.otazka} ${dialogy.pricemz} ${createList(group.slice(0, -1), 'nazev')} ${dialogy.odpovi} ${answer(nazev)}`
             
-            console.log(text)
             finalText += text + " "
             break;  // Stop the whole cyclus
         }
@@ -67,10 +69,35 @@ const answer = (nazev: string): string => {
         }       
     }
 
+    const handleSpeak = () => {
+        if (isPlaying) {
+            setIsPlaying(false)
+            window.speechSynthesis.cancel()
+        } else {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(finalText)
+                utterance.lang = 'cs-CZ'
+                utterance.rate = 0.8 
+                window.speechSynthesis.speak(utterance)
+                setIsPlaying(true)
+
+                utterance.onend = () => {
+                    setIsPlaying(false)
+                }
+            } else {
+                alert('Tvůj prohlížeč nepodporuje přehrávání')
+            }
+        }
+    }
+
     return (
         <>
         <header>
             <h1>Breadtime Stories</h1>
+            <button 
+                className="btn"
+                onClick={handleSpeak}>{isPlaying ? <ImStop2/> : <ImPlay3/>}
+            </button>
         </header>
         <main>
             <section className="story">
@@ -82,7 +109,7 @@ const answer = (nazev: string): string => {
             </section>
         </main>
         <footer>
-            <p>The bread is still walking...</p>
+            <a href="alena-pumprova-cz" className="web"><p>Alena Pumprová</p> <ImEarth /></a>
             <div className="socials">
                 <a href="https://www.linkedin.com/in/alena-pumprova/" title="LinekedIn"><ImLinkedin /></a>
                 <a href="https://www.facebook.com/alena.pumprova/" title="Facebook"><ImFacebook2 /></a>

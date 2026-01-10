@@ -15,8 +15,8 @@
   --stroke: rgba(207, 19, 34, 0.3);
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);  
 
-  --r-lg: 1.25rem;
-  --r-md: 0.9rem;
+  --r-lg: 1.5rem;
+  --r-md: 0.75rem;
   --header-padding: 2rem;
 
   --font-title: "Fraunces", serif; /* nebo Spectral */
@@ -36,13 +36,17 @@ body {
 
 /* HEADER */
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   background-image: url("./img/bread.webp");
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position:  center -3rem;
   max-width: 950px;
   height: 30vh;
   margin: 0 auto;
-  padding: 0 var(--header-padding);
+  padding: 0 var(--header-padding) 2rem;
   position: relative;
   border-bottom: 3px solid var(--main-color);
   box-shadow: var(--shadow-strong), var(--glow-red); 
@@ -65,9 +69,6 @@ h1, h2 {
 }
 
 header h1 {
-  position: absolute;
-  bottom: 1.5rem;
-  left: var(--header-padding);
   margin: 0;
   font-weight: 900;
   font-size: 3.5rem;
@@ -78,11 +79,33 @@ header h1 {
   text-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.8),
     0 0 40px rgba(207, 19, 34, 0.4); 
+  z-index: 1;
 }
 
-/* main {
-  padding: 1.25rem 0;
-} */
+header .btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--text-primary);
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1;
+  border-radius: var(--r-md);
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 0.3s ease,transform 0.2s ease;
+  z-index: 1;
+}
+
+header .btn:hover {
+  background-color: var(--text-primary);
+  color: var(--secondary-color);
+  font-size: 2.6rem;
+  transform: translateY(-2px);
+}
 
 /* STORY CARD */
 section.story {
@@ -131,11 +154,19 @@ footer {
   align-items: center;
   max-width: 950px;
   margin: 0 auto;
-  padding: 1rem 2.5rem;
+  padding: 1rem var(--header-padding);
   color: var(--text-secondary);
   font-size: 1.2rem;
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.web {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 .socials {
@@ -144,9 +175,17 @@ footer {
   gap: 1rem;
 }
 
-.socials a {
+.socials a, .web
+ {
   color: inherit;
   text-decoration: none;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.socials a:hover,
+.web:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
 }
 
 /* MOBILE */
