@@ -95,8 +95,8 @@ const answer = (nazev: string): string => {
         <header>
             <h1>Breadtime Stories</h1>
             <button
-            aria-label="Přehrát audio"
-                title="Přehrát audio" 
+                aria-label={isPlaying ? "Zastavit audio" : "Přehrát audio"}
+                title={isPlaying ? "Zastavit audio" : "Přehrát audio"}
                 className="btn"
                 onClick={handleSpeak}>{isPlaying ? <ImStop2/> : <ImPlay3/>}
             </button>
