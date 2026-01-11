@@ -92,7 +92,7 @@ export const dialogy = {
   potka: 'a potká',
   povida: 'povídá:',
   otazka: 'můžu jít s tebou?"',
-  pricemz: 'přičemž',
+  pricemz: 'Přičemž',
   odpovi: 'odpoví:',
   ano: '„Jo, můžeš."',
   ne: '„Ne."', 

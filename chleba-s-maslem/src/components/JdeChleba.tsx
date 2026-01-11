@@ -62,7 +62,7 @@ const answer = (nazev: string): string => {
             
             if (group.length > 1) {
                 const start = group.length === 2 ? dialogy.jde : dialogy.takJde
-                const text = `${start} ${createList(group.slice(0, -1), 'nazev')} ${dialogy.potka} ${akuzativ} ${stav}. a ${nazev} ${stav} ${dialogy.povida} „${createList(group.slice(0, -1), 'vokativ')}, ${dialogy.otazka} ${dialogy.pricemz} ${createList(group.slice(0, -1), 'nazev')} ${dialogy.odpovi} ${answer(nazev)}`
+                const text = `${start} ${createList(group.slice(0, -1), 'nazev')} ${dialogy.potka} ${akuzativ} ${stav} a ${nazev} ${stav} ${dialogy.povida} „${createList(group.slice(0, -1), 'vokativ')}, ${dialogy.otazka} ${dialogy.pricemz} ${createList(group.slice(0, -1), 'nazev')} ${dialogy.odpovi} ${answer(nazev)}`
                 
                 finalText += text + "\n\n" 
             }
@@ -94,7 +94,9 @@ const answer = (nazev: string): string => {
         <>
         <header>
             <h1>Breadtime Stories</h1>
-            <button 
+            <button
+            aria-label="Přehrát audio"
+                title="Přehrát audio" 
                 className="btn"
                 onClick={handleSpeak}>{isPlaying ? <ImStop2/> : <ImPlay3/>}
             </button>
